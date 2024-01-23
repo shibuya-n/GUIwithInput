@@ -10,22 +10,20 @@ public class Main extends JFrame{
     private static int width = 0;
     private static int height = 0;
 
-    private static JLabel widthError = new JLabel();
-    private static JLabel heightError = new JLabel();
+    private static JLabel errorMessage = new JLabel();
+
 
     public Main(){
         super("MAKE A WINDOW");
         Container c =  getContentPane();
-        c.setLayout(new GridLayout(2,1));
+        c.setLayout(new GridLayout(3,1));
 
         JPanel x = new JPanel();
         x.setLayout(new FlowLayout());
-
-        x.add(widthObj);
-        JButton widthButton = new JButton("Enter Width");
-        widthButton.addActionListener(new Button());
-        x.add(widthButton);
-        x.add(widthError);
+        JLabel heightLabel = new JLabel();
+        heightLabel.setText("Insert Height");
+        x.add(heightLabel);
+        x.add(heightObj);
 
 
 
@@ -33,43 +31,62 @@ public class Main extends JFrame{
 
         JPanel y = new JPanel();
         y.setLayout(new FlowLayout());
+        JLabel widthLabel = new JLabel();
+        widthLabel.setText("Insert Width");
+        y.add(widthLabel);
+        y.add(widthObj);
 
-        y.add(heightObj);
-        JButton heightButton = new JButton("Enter Height");
-        y.add(heightButton);
-        heightButton.addActionListener(new Button());
-        y.add(heightError);
 
+
+        JPanel z = new JPanel();
+        z.setLayout(new FlowLayout());
+        JButton inputButton = new JButton("Create A WINDOW");
+        z.add(inputButton);
+        inputButton.addActionListener(new Button());
+        z.add(errorMessage);
 
 
         c.add(x);
         c.add(y);
+        c.add(z);
 
 
 
+    }
+    public Main(int width, int height){
+        super("WIDTH: " + width + " HEIGHT: " + height);
+        Container c = getContentPane();
+        c.setLayout(new FlowLayout());
     }
 
     private static class Button implements ActionListener{
         public void actionPerformed(ActionEvent e){
             try {
+                errorMessage.setText("");
                 width = Integer.parseInt(widthObj.getText());
-                widthError.setText("");
+
 
             } catch (Exception f){
-                widthError.setText("Please enter a number");
+                errorMessage.setText("Please enter a number");
 
             }
 
             try {
+                errorMessage.setText("");
                 height = Integer.parseInt(heightObj.getText());
-                heightError.setText("");
+
 
             } catch (Exception g){
-                heightError.setText("Please enter a number");
+                errorMessage.setText("Please enter a number");
 
 
 
             }
+
+            Main newWindow = new Main(width, height);
+            newWindow.setVisible(true);
+            newWindow.setBounds(100,100,width,height);
+            newWindow.setResizable(false);
 
         }
     }
