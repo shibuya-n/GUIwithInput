@@ -11,7 +11,7 @@ public class Main extends JFrame{
     private static int height = 0;
 
     private static JLabel widthError = new JLabel();
-    private static JLabel  heightError = new JLabel();
+    private static JLabel heightError = new JLabel();
 
     public Main(){
         super("MAKE A WINDOW");
@@ -25,14 +25,8 @@ public class Main extends JFrame{
         JButton widthButton = new JButton("Enter Width");
         widthButton.addActionListener(new Button());
         x.add(widthButton);
+        x.add(widthError);
 
-        try {
-            width = Integer.parseInt(widthObj.getText());
-
-        } catch (Exception e){
-            widthError.setText("Please enter a number");
-            x.add(widthError);
-        }
 
 
 
@@ -44,14 +38,8 @@ public class Main extends JFrame{
         JButton heightButton = new JButton("Enter Height");
         y.add(heightButton);
         heightButton.addActionListener(new Button());
+        y.add(heightError);
 
-        try {
-            width = Integer.parseInt(heightObj.getText());
-
-        } catch (Exception e){
-            heightError.setText("Please enter a number");
-            y.add(heightError);
-        }
 
 
         c.add(x);
@@ -63,7 +51,25 @@ public class Main extends JFrame{
 
     private static class Button implements ActionListener{
         public void actionPerformed(ActionEvent e){
+            try {
+                width = Integer.parseInt(widthObj.getText());
+                widthError.setText("");
 
+            } catch (Exception f){
+                widthError.setText("Please enter a number");
+
+            }
+
+            try {
+                height = Integer.parseInt(heightObj.getText());
+                heightError.setText("");
+
+            } catch (Exception g){
+                heightError.setText("Please enter a number");
+
+
+
+            }
 
         }
     }
@@ -74,5 +80,7 @@ public class Main extends JFrame{
         window.setBounds(100, 100, 600, 300);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(true);
+
+
     }
 }
